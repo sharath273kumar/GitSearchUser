@@ -18,12 +18,13 @@
   },
   "proxy": "http://localhost:3001",
   "scripts": {
-    "start": "react-scripts start",
+    "begin": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node-env-run src/server --exec nodemon",
-    "dev": "run-p server start"
+    "dev": "run-p server begin",
+    "start": "npm run dev"
   },
   "eslintConfig": {
     "extends": [

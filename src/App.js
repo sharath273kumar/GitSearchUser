@@ -27,7 +27,7 @@ class App extends Component{
 
   fetchUser = (searchText, page) => { 
     if(searchText && searchText.length >= 3){
-      fetch("http://localhost:3001/api/search?searchKey=" + searchText + "&searchType=user&page=" + page,{method: 'post'})
+      fetch("/api/search?searchKey=" + searchText + "&searchType=user&page=" + page,{method: 'post'})
         .then((response)=>response.json())
         .then((userData)=>{
           console.log(userData.items.length);
@@ -50,7 +50,7 @@ class App extends Component{
     this.fetchUser(this.state.searchText, this.state.pageCounter-1);
   }
   clearCache = () => {
-    fetch("http://localhost:3001/api/clear-cache",{method: 'post'})
+    fetch("/api/clear-cache",{method: 'post'})
     .then((data)=>console.log(data.status))
     .catch((error)=>{console.log('ERROR');this.setState({emptyStatus:error})})
   }
