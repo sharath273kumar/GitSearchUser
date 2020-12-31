@@ -27,7 +27,14 @@ class App extends Component{
 
   fetchUser = (searchText, page) => { 
     if(searchText && searchText.length >= 3){
-      fetch("/api/search?searchKey=" + searchText + "&searchType=user&page=" + page,{method: 'post'})
+      fetch("/api/search",
+      {
+        method: 'POST',
+        body: JSON.stringify({searchKey: searchText, searchType:"user", page: page}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
         .then((response)=>response.json())
         .then((userData)=>{
           console.log(userData.items.length);
@@ -49,6 +56,7 @@ class App extends Component{
   previousPage = () =>{
     this.fetchUser(this.state.searchText, this.state.pageCounter-1);
   }
+
   clearCache = () => {
     fetch("/api/clear-cache",{method: 'post'})
     .then((data)=>console.log(data.status))

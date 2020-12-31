@@ -1,21 +1,24 @@
 const express = require('express');
 const cors = require('cors');
 const getUsers = require('./getUsers');
+const bodyParser = require('body-parser');
 const constants = require('./constants');
 const Cache = require('node-cache' );
 const PORT = process.env.PORT || 3001 ;
 
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 const cache = new Cache({deleteOnExpire: true});
 
 app.use(cors());
 app.options('*', cors());
 
 app.post('/api/search', (request, response) => {
-    const searchKey = request.query.searchKey;
-    const searchType = request.query.searchType;
-    const page = request.query.page;
+    const searchKey = request.body.searchKey;
+    const searchType = request.body.searchType;
+    const page = request.body.page;
     const cacheKey = searchKey+page;
     response.setHeader('Content-Type', 'application/json');
 
